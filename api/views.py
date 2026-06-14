@@ -5,8 +5,8 @@ from students.models import Student
 
 def studentsView(request):
     students = Student.objects.all()
-    print(students)
-    return JsonResponse(students)
+    students_list = list(students.values()) #Manual serilization 
+    return JsonResponse(students_list,safe=False)
 
 
 
