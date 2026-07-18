@@ -178,5 +178,7 @@ class BlogsDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CommentsDetailView(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    queryset = Comment.objects.all()
+    serializer_class = CommnetSerializer
+    lookup_field = 'pk'
 
