@@ -9,8 +9,13 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from django.http import Http404  
 from rest_framework import mixins, generics,viewsets
+from rest_framework.pagination import PageNumberPagination
 from blogs.models import Blog,Comment
 from blogs.serializers import BlogSerializer,CommnetSerializer
+
+
+class BlogPagination(PageNumberPagination):
+    page_size = 2
 
 # def studentsView(request):
 #     students = Student.objects.all()
@@ -166,10 +171,12 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class BlogsView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    pagination_class = BlogPagination
 
 class CommentView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommnetSerializer
+    pagination_class = BlogPagination
 
 class BlogsDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
